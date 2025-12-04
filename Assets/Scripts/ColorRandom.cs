@@ -4,16 +4,10 @@ using Random = UnityEngine.Random;
 
 public class ColorRandom : MonoBehaviour
 {
-    public void ApplyColor(List<GameObject> cubes)
+    public void ApplyColor(List<Cube> cubes)
     {
         foreach (var cube in cubes)
-            cube.GetComponent<MeshRenderer>().material.color = GetColor();
-    }
-
-    private Color GetColor()
-    {
-        Color color = Random.ColorHSV();
-
-        return color;
+            if (cube.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+                meshRenderer.material.color = Random.ColorHSV();
     }
 }
